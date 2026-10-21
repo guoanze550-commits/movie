@@ -53,6 +53,11 @@ jobs:
         run: |
           set -o pipefail
           bash scripts/render.sh "$FILM_PROJECT" "$FILM_PROFILE" 2>&1 | tee reports/ci-validation.log
+      - name: Verify Qianli first-review animation
+        if: inputs.project == 'films/qianli-jiangshan/preview'
+        run: |
+          node films/qianli-jiangshan/qa/review.mjs
+          cp films/qianli-jiangshan/qa/technical.json films/qianli-jiangshan/preview/out/technical.json
       - name: Publish diagnostics summary
         if: always()
         run: python3 scripts/ci-summary.py
