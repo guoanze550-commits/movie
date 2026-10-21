@@ -1,0 +1,12 @@
+node_modules/
+.venv/
+.cache/
+**/out/
+**/stills/
+*.mp4
+*.wav
+_site/
+reports/*.log
+!reports/validation.log
+_artifacts/
+.venv-voice/

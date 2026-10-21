@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "mean_absolute_pixel_error": {
+    "preview-2.71": 0.6769458912037036,
+    "preview-4.83": 0.6860763888888889,
+    "preview-0": 0.6800824652777777,
+    "preview-3": 0.684470486111111,
+    "preview-1.2": 1.6057855902777778,
+    "preview-5.958333": 0.6785026041666667
+  },
+  "note": "Normalized spatial layout parity only; artistic quality still requires manual review"
+}
