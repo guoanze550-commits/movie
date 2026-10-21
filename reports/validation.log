@@ -2,20 +2,21 @@
 > test
 > node --test tests/*.test.mjs
 
-✔ 51 official styles have exact names, classifications, normative source and hashes (7.575729ms)
-✔ unselected film cannot generate a task or pass render gate (30.87271ms)
-✔ chosen style produces correct defaults and all aspect ratios (1.158928ms)
-✔ custom mix is marked nonofficial and review is required (0.282328ms)
-✔ invalid ids, duration and parameters are rejected (0.38765ms)
-✔ CLI creates project + task, rejects overwriting user files (120.822955ms)
-ℹ tests 6
+✔ 51 official styles have exact names, classifications, normative source and hashes (11.950127ms)
+✔ unselected film cannot generate a task or pass render gate (29.105501ms)
+✔ chosen style produces correct defaults and all aspect ratios (0.929774ms)
+✔ custom mix is marked nonofficial and review is required (0.171788ms)
+✔ custom resolution respects aspect and codec pixel constraints (0.36183ms)
+✔ invalid ids, duration and parameters are rejected (0.228066ms)
+✔ CLI creates project + task, rejects overwriting user files (208.084607ms)
+ℹ tests 7
 ℹ suites 0
-ℹ pass 6
+ℹ pass 7
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 240.615715
+ℹ duration_ms 340.374153
 npm notice
 npm notice New major version of npm available! 11.9.0 -> 12.2.0
 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
@@ -40,46 +41,46 @@ PASS: first/middle/last/random frames match preview vs production within 5 pixel
 [note] WebGL runs on software rendering (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftSh): 3D/CRT demos will be slow. macOS: LEMO_ANGLE=metal; Linux: needs GPU drivers. See core/README.md.
 events 3 dur 6 → /workspace/movie/fixtures/smoke/events.json
 [note] WebGL runs on software rendering (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftSh): 3D/CRT demos will be slow. macOS: LEMO_ANGLE=metal; Linux: needs GPU drivers. See core/README.md.
-/workspace/movie/fixtures/smoke/stills/t_0.jpg 32ms
-/workspace/movie/fixtures/smoke/stills/t_5.958333333333333.jpg 15ms
-/workspace/movie/fixtures/smoke/stills/t_0.00.jpg 18ms
-/workspace/movie/fixtures/smoke/stills/t_0.20.jpg 14ms
-/workspace/movie/fixtures/smoke/stills/t_0.40.jpg 24ms
-/workspace/movie/fixtures/smoke/stills/t_0.60.jpg 64ms
-/workspace/movie/fixtures/smoke/stills/t_0.80.jpg 15ms
-/workspace/movie/fixtures/smoke/stills/t_1.00.jpg 11ms
-/workspace/movie/fixtures/smoke/stills/t_1.20.jpg 22ms
-/workspace/movie/fixtures/smoke/stills/t_1.40.jpg 14ms
-/workspace/movie/fixtures/smoke/stills/t_1.60.jpg 15ms
-/workspace/movie/fixtures/smoke/stills/t_1.80.jpg 18ms
-/workspace/movie/fixtures/smoke/stills/t_2.00.jpg 16ms
-/workspace/movie/fixtures/smoke/stills/t_2.20.jpg 16ms
-/workspace/movie/fixtures/smoke/stills/t_2.40.jpg 20ms
-/workspace/movie/fixtures/smoke/stills/t_2.60.jpg 11ms
-/workspace/movie/fixtures/smoke/stills/t_2.80.jpg 17ms
-/workspace/movie/fixtures/smoke/stills/t_3.00.jpg 18ms
-/workspace/movie/fixtures/smoke/stills/t_3.20.jpg 16ms
+/workspace/movie/fixtures/smoke/stills/t_0.jpg 69ms
+/workspace/movie/fixtures/smoke/stills/t_5.958333333333333.jpg 47ms
+/workspace/movie/fixtures/smoke/stills/t_0.00.jpg 66ms
+/workspace/movie/fixtures/smoke/stills/t_0.20.jpg 48ms
+/workspace/movie/fixtures/smoke/stills/t_0.40.jpg 43ms
+/workspace/movie/fixtures/smoke/stills/t_0.60.jpg 30ms
+/workspace/movie/fixtures/smoke/stills/t_0.80.jpg 38ms
+/workspace/movie/fixtures/smoke/stills/t_1.00.jpg 34ms
+/workspace/movie/fixtures/smoke/stills/t_1.20.jpg 53ms
+/workspace/movie/fixtures/smoke/stills/t_1.40.jpg 23ms
+/workspace/movie/fixtures/smoke/stills/t_1.60.jpg 20ms
+/workspace/movie/fixtures/smoke/stills/t_1.80.jpg 32ms
+/workspace/movie/fixtures/smoke/stills/t_2.00.jpg 17ms
+/workspace/movie/fixtures/smoke/stills/t_2.20.jpg 21ms
+/workspace/movie/fixtures/smoke/stills/t_2.40.jpg 26ms
+/workspace/movie/fixtures/smoke/stills/t_2.60.jpg 22ms
+/workspace/movie/fixtures/smoke/stills/t_2.80.jpg 37ms
+/workspace/movie/fixtures/smoke/stills/t_3.00.jpg 25ms
+/workspace/movie/fixtures/smoke/stills/t_3.20.jpg 17ms
 /workspace/movie/fixtures/smoke/stills/t_3.40.jpg 17ms
-/workspace/movie/fixtures/smoke/stills/t_3.60.jpg 17ms
-/workspace/movie/fixtures/smoke/stills/t_3.80.jpg 15ms
-/workspace/movie/fixtures/smoke/stills/t_4.00.jpg 17ms
-/workspace/movie/fixtures/smoke/stills/t_4.20.jpg 18ms
-/workspace/movie/fixtures/smoke/stills/t_4.40.jpg 19ms
-/workspace/movie/fixtures/smoke/stills/t_4.60.jpg 14ms
-/workspace/movie/fixtures/smoke/stills/t_4.80.jpg 15ms
-/workspace/movie/fixtures/smoke/stills/t_5.00.jpg 18ms
-/workspace/movie/fixtures/smoke/stills/t_5.20.jpg 16ms
-/workspace/movie/fixtures/smoke/stills/t_5.40.jpg 18ms
-/workspace/movie/fixtures/smoke/stills/t_5.60.jpg 31ms
+/workspace/movie/fixtures/smoke/stills/t_3.60.jpg 22ms
+/workspace/movie/fixtures/smoke/stills/t_3.80.jpg 18ms
+/workspace/movie/fixtures/smoke/stills/t_4.00.jpg 33ms
+/workspace/movie/fixtures/smoke/stills/t_4.20.jpg 32ms
+/workspace/movie/fixtures/smoke/stills/t_4.40.jpg 41ms
+/workspace/movie/fixtures/smoke/stills/t_4.60.jpg 31ms
+/workspace/movie/fixtures/smoke/stills/t_4.80.jpg 28ms
+/workspace/movie/fixtures/smoke/stills/t_5.00.jpg 32ms
+/workspace/movie/fixtures/smoke/stills/t_5.20.jpg 35ms
+/workspace/movie/fixtures/smoke/stills/t_5.40.jpg 33ms
+/workspace/movie/fixtures/smoke/stills/t_5.60.jpg 30ms
 /workspace/movie/fixtures/smoke/stills/t_5.80.jpg 35ms
 [note] WebGL runs on software rendering (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftSh): 3D/CRT demos will be slow. macOS: LEMO_ANGLE=metal; Linux: needs GPU drivers. See core/README.md.
 OK  title              at 0.00s    4 chars  need 2.39s  got 6.00s  "渲染测试"
 [note] WebGL runs on software rendering (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftSh): 3D/CRT demos will be slow. macOS: LEMO_ANGLE=metal; Linux: needs GPU drivers. See core/README.md.
-w0 0/72  1s
 w1 0/72  1s
-w1 60/72  2s
-w0 60/72  2s
-done /workspace/movie/fixtures/smoke/out/video.mp4 144 frames 3s
+w0 0/72  1s
+w1 60/72  3s
+w0 60/72  3s
+done /workspace/movie/fixtures/smoke/out/video.mp4 144 frames 4s
 /workspace/movie/fixtures/smoke/out/subtitles.srt 1 cues
 /workspace/movie/fixtures/smoke/out/final.mp4
     I:         -14.0 LUFS
