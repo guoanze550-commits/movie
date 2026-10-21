@@ -1,6 +1,6 @@
 # 真实验收记录
 
-本机日期：2026-10-21。部署工作进行中；此文件在远程验证后更新。
+本机日期：2026-10-21。本机部署与渲染已通过；远程发布/Actions 尚未验收，不能宣布全部部署条件满足。
 
 ## 已通过
 
@@ -32,3 +32,10 @@
 - 云配置保存不等于发布；尚未验证新云任务快照恢复。
 
 《文明未央》仍为 awaiting_style / unselected，仅保留项目配置，没有正式片源码或成片。
+
+## GitHub 与云配置实际状态
+
+- 首次源码提交 af6a674781492cb4e18c3d200dd966ec0fe70af5 已推送到用户仓库 studio-bootstrap，并通过 git ls-remote 验证。后续状态修订提交见 Git log。
+- 远程 main 不存在，因此没有可作为 base 的 main 提交；未创建或伪造 PR。
+- 已保存云配置 install_script、start_skill 以及四个额外出口域名：cdn.playwright.dev、api.github.com、lemomo-ai.github.io、speech.platform.bing.com。草稿保存成功，尚需环境设置中审阅、保存并发布；这没有改变当前实例的代理策略。
+- GitHub HTTPS 推送成功不代表 API 可用。GitHub 网页已核实首次自动测试运行 39574913668 失败，安装依赖与浏览器步骤成功，失败位于验收步骤；Artifact 12334341306 已生成，但未登录下载端点返回 404，未能下载核实。API 仍被策略阻止，正在以 CI 摘要改进诊断。未核实 Pages 站点。访问证据见 remote-web-check.json。

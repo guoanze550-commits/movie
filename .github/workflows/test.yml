@@ -21,7 +21,12 @@ jobs:
       - name: Install browser OS dependencies
         run: npx --prefix upstream/lemo-opuscar playwright-core install-deps chromium
       - name: Unit, browser and real render checks
-        run: bash scripts/verify.sh
+        run: |
+          set -o pipefail
+          bash scripts/verify.sh 2>&1 | tee reports/ci-validation.log
+      - name: Publish diagnostics summary
+        if: always()
+        run: python3 scripts/ci-summary.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:

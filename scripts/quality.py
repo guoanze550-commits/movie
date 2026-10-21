@@ -1,5 +1,5 @@
 import json,sys,subprocess,pathlib,math,re
-from PIL import Image,ImageStat
+from PIL import Image,ImageStat,ImageChops
 p=pathlib.Path(sys.argv[1]);w,h=map(int,sys.argv[2].split('x'));fps=int(sys.argv[3]);out=p/'out'
 checks={};manual=['艺术质量、风格符合度和声音主观听感','正式片动作表演、字幕遮挡主体、史实与素材授权逐项审核']
 def run(args):return subprocess.run(args,check=True,capture_output=True,text=True)
@@ -18,7 +18,8 @@ checks['no_black_intervals']='black_start:' not in black.stderr
 images=list((p/'stills').glob('*.jpg'));checks['sample_count']=len(images)>=3
 means=[ImageStat.Stat(Image.open(i).convert('RGB')).mean for i in images]
 checks['nonblank_samples']=all(max(m)-min(m)>2 and sum(m)/3>5 for m in means)
-checks['motion_present']=len(set(tuple(round(x,2) for x in m) for m in means))>2
+frames=[Image.open(i).convert('RGB') for i in images]
+checks['motion_present']=len(frames)>1 and any(ImageChops.difference(frames[0],f).getbbox() is not None for f in frames[1:])
 if (p/'subtitles.json').exists():
     cues=json.loads((p/'subtitles.json').read_text());checks['subtitle_timing']=bool(cues) and all(0<=x['t0']<x['t1']<=j['duration'] and x['t1']-x['t0']>=max(1.8,len(x['text'])/4.5+1.5) for x in cues)
     checks['subtitle_export']=(out/'subtitles.srt').stat().st_size>0
