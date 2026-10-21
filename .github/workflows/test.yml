@@ -46,3 +46,9 @@ jobs:
       - name: Verify downloaded artifact MP4
         if: success()
         run: python3 scripts/verify-downloaded.py _downloaded
+  official-render-smoke:
+    needs: test
+    uses: ./.github/workflows/render.yml
+    with:
+      project: fixtures/smoke
+      profile: preview

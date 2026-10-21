@@ -1,5 +1,15 @@
 name: Render film
 on:
+  workflow_call:
+    inputs:
+      project:
+        type: string
+        required: false
+        default: fixtures/smoke
+      profile:
+        type: string
+        required: false
+        default: preview
   workflow_dispatch:
     inputs:
       project:
@@ -34,7 +44,12 @@ jobs:
         env:
           FILM_PROJECT: ${{ inputs.project }}
           FILM_PROFILE: ${{ inputs.profile }}
-        run: bash scripts/render.sh "$FILM_PROJECT" "$FILM_PROFILE"
+        run: |
+          set -o pipefail
+          bash scripts/render.sh "$FILM_PROJECT" "$FILM_PROFILE" 2>&1 | tee reports/ci-validation.log
+      - name: Publish diagnostics summary
+        if: always()
+        run: python3 scripts/ci-summary.py
       - name: Collect outputs including failures
         if: always()
         run: python3 scripts/collect-artifacts.py

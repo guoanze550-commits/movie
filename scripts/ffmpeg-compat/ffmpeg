@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+"""Normalize analysis PTS for FFmpeg loudnorm's latency on older Ubuntu builds.
+
+No samples are added, removed or skipped. Official mux still checks decode errors,
+WAV data length, actual decoded duration, and performs its original mastering.
+"""
+import os,sys,pathlib
+real=os.environ.get('MOVIE_REAL_FFMPEG')
+if not real or pathlib.Path(real).resolve()==pathlib.Path(__file__).resolve():
+    sys.exit('MOVIE_REAL_FFMPEG must name the actual FFmpeg binary')
+args=sys.argv[1:]
+if '-progress' in args and '-af' in args and 'null' in args:
+    i=args.index('-af')+1
+    if args[i].startswith('loudnorm='):
+        args[i]+= ',asetpts=N/SR/TB'
+os.execv(real,[real,*args])

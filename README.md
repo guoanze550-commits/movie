@@ -31,6 +31,8 @@ npm run studio
 
 已真实尝试官方 `sh plugin/skills/lemo-opuscar/scripts/setup.sh deps`：默认 npm 缓存不可写；修正缓存后，浏览器 CDN 被网络策略拒绝。因此可复现安装脚本采用官方锁文件 `npm ci`、固定 Python venv 和受支持的现有 Chromium 覆盖路径，仍使用原版官方渲染程序。未修改上游实现。
 
+Ubuntu FFmpeg 6 的 loudnorm 分析可能保留负起始时间戳，导致官方 mux 按进度时间误判完整音频为截断。本工程仅在分析阶段通过 `scripts/ffmpeg-compat/ffmpeg` 追加标准 `asetpts=N/SR/TB`，将实际输出样本重新计时；不补音频、不跳过解码、损坏/长度或响度检查，最终仍调用未修改的官方 mux。兼容层通过实际截断 WAV 的拒绝回归检查。
+
 ## 选风格与创建项目
 
 1. 在展厅查看 51 张卡片和官方 STYLE.md；无风格会阻止生成任务。

@@ -11,3 +11,5 @@ upstream/lemo-opuscar/.venv/bin/python scripts/check-fonts.py
 node tests/frame-parity.mjs
 upstream/lemo-opuscar/.venv/bin/python scripts/frame-parity.py
 bash scripts/render.sh fixtures/smoke preview
+
+python3 tests/audio-integrity.py
