@@ -10,7 +10,7 @@ timeline=json.loads(subprocess.check_output(['node','--input-type=module','-e',"
 n=round(timeline['duration']*SR);t=np.arange(n)/SR
 music=np.zeros((n,2));foley=music.copy();ambience=music.copy()
 # Original sustained open fifth and three gently plucked harmonics, not a guqin recording.
-fade=np.minimum(t/.35,1)*np.minimum((4-t)/.35,1)
+fade=np.clip((t-timeline['silence'][1])/.15,0,1)*np.minimum((timeline['duration']-t)/.35,1)
 bed=.06*(np.sin(2*np.pi*146.832*t)+.45*np.sin(2*np.pi*220*t))*fade
 music[:]=bed[:,None]
 for note_data in timeline['sound_notes']:

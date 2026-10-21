@@ -3,6 +3,7 @@
 - 原创故事改编与导演：依照用户提供的《千里江山，走出画卷》创意；本片六镜与角色不采用官方 Demo 剧情。
 - 历史美学参考：北宋王希孟《千里江山图》的青绿设色、长卷结构与散点透视。没有复制原画图像或博物馆数字扫描素材。
 - Lemo-Opuscar：Git 子模块 `upstream/lemo-opuscar`，固定 SHA `b5e8ef93930b6d828f352055a689320f138237b1`，MIT。`vendor/` 三个模块原样复制，出处与校验见 PROVENANCE.md，MIT 许可见 vendor/LICENSE。
+- `frames/base-comparison.jpg` 左栏是官方 `paper-lantern/poster.jpg`（上游 MIT），只供基底风格对照；右栏才是本片原创测试帧，不将官方海报作为本片画面。
 - Three.js r170：官方依赖中的 Three.js，MIT，由现有 import map 使用；未另行安装另一套引擎。
 - 山体、皴线、颗粒、绢纹、亭桥、松树、船、白鹤剪影与绑定：本目录程序原创，固定随机种子。不使用 AI 图片、AI 视频、商业素材或原画贴图。
 - 声音：本目录原创频率/包络设计与官方 `core/audio/sfx.py` 的滤波、噪声和分轨叠加函数。无取样商业录音；无中文配音。正式配乐待审核后制作。

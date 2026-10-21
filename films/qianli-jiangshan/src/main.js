@@ -36,7 +36,9 @@ S.add(grains);
 const bird=crane();bird.scale.setScalar(.018);S.add(bird);
 function updateLayer(m,rise,t,i){const a=m.geometry.attributes.position,b=m.userData.basePositions,base=-.115;
  for(let j=0;j<a.count;j++){const x=b[j*3],y=b[j*3+1],v=(y+H/2)/H;const swell=(Math.sin(x*26+i)*.0013+Math.cos(x*47-i)*.0006)*Math.sin(v*Math.PI);a.setXYZ(j,x,y<base?y:base+(y-base)*rise,(swell+Math.sin(v*Math.PI)*.005*Math.cos(x*18+i))*rise)}a.needsUpdate=true;
- m.castShadow=rise>.3;m.material.opacity=1;m.position.x=0;m.rotation.y=0;
+ // Deformed bounds differ from the initial flat sheet. Keep shadow membership
+ // stable and avoid rejecting dynamic geometry using that stale bounding sphere.
+ m.castShadow=true;m.frustumCulled=false;m.material.opacity=1;m.position.x=0;m.rotation.y=0;
 }
 function shotState(t){const p=ss(seg(t,.35,3.5)),camP=ss(seg(t,1.1,4));if(shot==='landscape')return {rise:1,cam:[-.012,.015,.45,-.012,.015,-.08],birdScale:.005,birdPos:[.11,-.012,.02],bank:-.03};if(shot==='crane')return {rise:1,cam:[.040,.014,.318,.015,.008,-.06],birdScale:.016,birdPos:[.032+Math.sin(t*.25)*.003,.019,.092],bank:-.13};if(shot==='pigment')return {rise:.47,cam:[.020,-.028,.29,.015,-.047,-.065],birdScale:0,birdPos:[0,0,0],bank:0};return {rise:lerp(.045,1,p),cam:[lerp(.035,-.025,camP),lerp(-.037,.006,camP),lerp(.31,.45,camP),lerp(.025,-.012,camP),lerp(-.075,.004,camP),-.07],birdScale:.004*p,birdPos:[.12,-.01,.025],bank:-.08}}
 window.DUR=REVIEW.duration;window.EV=REVIEW.events;const label=document.createElement('div');label.textContent='TECH TEST';Object.assign(label.style,{position:'fixed',left:'24px',bottom:'18px',color:'#394f46',font:'12px serif',letterSpacing:'2px'});if(shot==='morph')document.body.append(label);

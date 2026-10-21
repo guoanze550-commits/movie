@@ -5,6 +5,7 @@
 - [导演方案](TREATMENT.md)：三种叙事结构、选定方案、六镜 60 秒时间表、镜头、表演与声音设计。
 - [原创风格规范](style/STYLE.md)：宋韵青绿山水；以官方 `paper-lantern` 为基础的非官方扩展，不计入官方 51 种风格。
 - `frames/landscape.jpg`、`pigment.jpg`、`crane.jpg`：实际 WebGL 逐帧工具渲染的 1920×1080 风格测试，不是 AI 图片。
+- `frames/review-sheet.jpg`：三帧总览；`base-comparison.jpg` 左为官方基底海报、右为本片测试，便于比较材质与色彩差异。
 - `preview/out/final.mp4`：4 秒、1920×1080、24fps 技术测试，Actions Artifacts 内可下载；不是完整影片。
 - [美术审查记录](qa/ART-REVIEW.md)：未通过人工定稿的事项。
 - `qa/technical.json`：随机时刻重复渲染和连续曲线检查的实测数据。
