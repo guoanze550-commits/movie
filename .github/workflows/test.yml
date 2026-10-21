@@ -1,5 +1,9 @@
 name: Studio checks
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    paths: ['studio/**', 'styles/**', 'scripts/**', 'tests/**', 'fixtures/**', 'upstream/**', '.github/workflows/**', 'requirements-core.lock', 'package*.json', 'AGENTS.md']
+  pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:

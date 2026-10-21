@@ -57,11 +57,35 @@ try {
     true,
   );
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.route("**/public/posters/ink-wash.jpg", (route) => route.abort());
+  await page.reload();
+  await page.waitForFunction(
+    () => document.querySelectorAll(".card").length === 51,
+  );
+  await page.locator("#search").fill("水墨");
+  await page.locator(".card .preview-error").waitFor();
+  await page.route("**/films/ink-wash.mp4", (route) => route.abort());
+  await page.locator(".card").click();
+  await page.locator("video").evaluate((video) => video.load());
+  await page.getByText("官方视频预览无法加载，请访问官方示例链接。").waitFor();
+  await page.locator("#close").click();
+  await page.unrouteAll();
+  await page.reload();
+  await page.waitForFunction(
+    () => document.querySelectorAll(".card").length === 51,
+  );
+  assert.match(await page.locator("#selected").innerText(), /unselected/);
+  await page
+    .locator(".card img")
+    .evaluateAll((imgs) => imgs.forEach((img) => (img.loading = "eager")));
+  await page
+    .locator(".card img")
+    .evaluateAll((imgs) => Promise.all(imgs.map((img) => img.decode())));
   fs.mkdirSync("reports", { recursive: true });
   await page.screenshot({ path: "reports/studio.png", fullPage: true });
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: 51 cards, 10 categories, Chinese search, style gating, details, selection, JSON download, custom mix, mobile layout, no JS errors",
+    "PASS: 51 cards, 10 categories, Chinese search, style gating, details, selection, JSON download, custom mix, mobile layout, honest image/video failure messages, no JS errors",
   );
 } finally {
   await browser.close();

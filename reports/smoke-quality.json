@@ -55,7 +55,7 @@
         "start_time": "0.000000",
         "duration_ts": 73728,
         "duration": "6.000000",
-        "bit_rate": "22298",
+        "bit_rate": "22824",
         "bits_per_raw_sample": "8",
         "nb_frames": "144",
         "extradata_size": 51,
@@ -109,7 +109,7 @@
         "start_time": "0.000000",
         "duration_ts": 288000,
         "duration": "6.000000",
-        "bit_rate": "188795",
+        "bit_rate": "188817",
         "nb_frames": "283",
         "extradata_size": 5,
         "disposition": {
@@ -141,7 +141,7 @@
       }
     ],
     "format": {
-      "filename": "fixtures/smoke/out/final.mp4",
+      "filename": "/workspace/movie/fixtures/smoke/out/final.mp4",
       "nb_streams": 2,
       "nb_programs": 0,
       "nb_stream_groups": 0,
@@ -149,8 +149,8 @@
       "format_long_name": "QuickTime / MOV",
       "start_time": "0.000000",
       "duration": "6.000000",
-      "size": "164283",
-      "bit_rate": "219044",
+      "size": "164694",
+      "bit_rate": "219592",
       "probe_score": 100,
       "tags": {
         "major_brand": "isom",

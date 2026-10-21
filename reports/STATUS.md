@@ -38,8 +38,15 @@
 - 首次源码提交 af6a674781492cb4e18c3d200dd966ec0fe70af5 已推送到用户仓库 studio-bootstrap，并通过 git ls-remote 验证。后续状态修订提交见 Git log。
 - 远程 main 不存在，因此没有可作为 base 的 main 提交；未创建或伪造 PR。
 - 已保存云配置 install_script、start_skill 以及四个额外出口域名：cdn.playwright.dev、api.github.com、lemomo-ai.github.io、speech.platform.bing.com。草稿保存成功，尚需环境设置中审阅、保存并发布；这没有改变当前实例的代理策略。
-- GitHub HTTPS 推送成功不代表 API 可用。GitHub 网页已核实首次自动测试运行 39574913668 失败，安装依赖与浏览器步骤成功，失败位于验收步骤；Artifact 12334341306 已生成，但未登录下载端点返回 404，未能下载核实。API 仍被策略阻止，已通过公开 CI 注释定位 Ubuntu FFmpeg 6 loudnorm 输出 PTS 偏移，时间戳重置实验未解决问题，已移除；改为 CI 从官方固定 FFmpeg 7.1.5 源码构建，并保留全部官方校验，正在重跑。未核实 Pages 站点。访问证据见 remote-web-check.json。
+- GitHub HTTPS 推送成功不代表 API 可用。GitHub 网页已核实首次自动测试运行 39574913668 失败，安装依赖与浏览器步骤成功，失败位于验收步骤；Artifact 12334341306 已生成，但未登录下载端点返回 404，未能下载核实。API 仍被策略阻止，已通过公开 CI 注释定位 Ubuntu FFmpeg 6 loudnorm 输出 PTS 偏移，时间戳重置实验未解决问题，已移除；改为 CI 从官方固定 FFmpeg 7.1.5 源码构建，并保留全部官方校验，本机从相同源码编译后整套验收通过；远程首个验收作业与 Artifact 重新下载/解码也已成功，复用渲染作业待完成。未核实 Pages 站点。访问证据见 remote-web-check.json。
 
 ## Pages 实际执行
 
 - 运行 https://github.com/guoanze550-commits/movie/actions/runs/39576556224 ：静态站点构建成功，生成 github-pages Artifact；deploy-pages 返回 404，明确要求先在仓库 Settings → Pages 启用 GitHub Actions 来源。未发布可验证的线上工作台。此设置需要仓库管理权限；当前 GitHub API 出口被拒绝，不能替用户完成设置。
+
+## FFmpeg 兼容问题已定位并修复
+
+- 远程旧 FFmpeg 6 报告 loudnorm 进度仅 3.1 秒，完整的 6 秒 WAV 被上游 mux 拒绝。仅重置分析时间戳的实验未奏效，已删除，不作为最终方案。
+- 最终方案从官方 FFmpeg n7.1.5 完整 SHA 3a0867c2bfda4a4d4309ca1a8cbdc6175e67f587 构建（gcc/make/libx264，最多 4 任务，保留编解码与完整校验），CI 缓存产物。
+- 本机已实际编译该源码，使用新二进制重新 setup + verify 全通过；真实截断 WAV 拒绝回归通过。
+- 远程运行 https://github.com/guoanze550-commits/movie/actions/runs/39577382672 的首个验收 job 已通过，生成 studio-validation，并通过 download-artifact 从服务重新下载 MP4、整片解码并记录 SHA256 4c0171e3d3cea6a151f593be85faa0d22131d2623c9739244ee54f7cb6223877。该运行还将调用 render.yml 本身，完成后记录最终结果。

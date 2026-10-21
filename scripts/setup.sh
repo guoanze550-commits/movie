@@ -10,7 +10,13 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$ROOT/.cache}"
 mkdir -p "$npm_config_cache" "$PIP_CACHE_DIR" "$UV_CACHE_DIR" "$PLAYWRIGHT_BROWSERS_PATH"
 node -e 'if(+process.versions.node.split(".")[0]<20)process.exit(1)'
 python3 -c 'import sys; assert sys.version_info >= (3,11)'
+if [[ -x "$ROOT/.cache/ffmpeg/bin/ffmpeg" ]]; then export PATH="$ROOT/.cache/ffmpeg/bin:$PATH"; fi
 command -v ffmpeg; command -v ffprobe
+MAJOR=$(ffmpeg -version | sed -n '1s/.*version n\{0,1\}\([0-9]*\).*/\1/p')
+if [[ -z "$MAJOR" ]] || (( MAJOR < 7 )); then
+  bash "$ROOT/scripts/install-ffmpeg.sh"
+  export PATH="$ROOT/.cache/ffmpeg/bin:$PATH"
+fi
 git submodule update --init --recursive
 EXPECTED=$(cat upstream/COMMIT)
 test "$(git -C upstream/lemo-opuscar rev-parse HEAD)" = "$EXPECTED"

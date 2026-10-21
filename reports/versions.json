@@ -15,5 +15,7 @@
     "soundfile==0.14.0",
     "soxr==1.1.0",
     "typing_extensions==4.16.0"
-  ]
+  ],
+  "compiled_ffmpeg": "ffmpeg version n7.1.5 Copyright (c) 2000-2026 the FFmpeg developers",
+  "compiled_ffmpeg_source": "https://github.com/FFmpeg/FFmpeg/tree/3a0867c2bfda4a4d4309ca1a8cbdc6175e67f587"
 }
