@@ -2,6 +2,7 @@
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
+if [[ -x "$ROOT/.cache/ffmpeg/bin/ffmpeg" ]]; then export PATH="$ROOT/.cache/ffmpeg/bin:$PATH"; fi
 export PLAYWRIGHT_BROWSERS_PATH="${PLAYWRIGHT_BROWSERS_PATH:-$ROOT/.cache/ms-playwright}"
 if [[ -z ${PLAYWRIGHT_CHROME:-} ]] && command -v chromium >/dev/null; then export PLAYWRIGHT_CHROME=$(command -v chromium); fi
 npm test

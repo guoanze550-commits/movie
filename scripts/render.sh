@@ -2,8 +2,7 @@
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 export LIB="$ROOT/upstream/lemo-opuscar"
-export MOVIE_REAL_FFMPEG="${MOVIE_REAL_FFMPEG:-$(command -v ffmpeg)}"
-export PATH="$ROOT/scripts/ffmpeg-compat:$PATH"
+if [[ -x "$ROOT/.cache/ffmpeg/bin/ffmpeg" ]]; then export PATH="$ROOT/.cache/ffmpeg/bin:$PATH"; fi
 export PLAYWRIGHT_BROWSERS_PATH="${PLAYWRIGHT_BROWSERS_PATH:-$ROOT/.cache/ms-playwright}"
 export LEMO_COLOR=bt709
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$ROOT/.cache}"
