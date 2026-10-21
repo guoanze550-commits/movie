@@ -11,3 +11,5 @@ reports/*.log
 _artifacts/
 .venv-voice/
 _downloaded/
+**/__pycache__/
+*.pyc

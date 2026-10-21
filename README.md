@@ -11,7 +11,7 @@
 - 可交互网页：分类、中文搜索、真实官方示例帧、详情、官方视频链接、风格选择、配置下载、Codex 任务复制及非官方混合风格。
 - 项目生成器：网页生成配置并下载；CLI 写入独立作品目录，拒绝覆盖已有目录。不自动生成未经导演设计的影片源码。
 - 本机通过：7 个单元/集成测试、真实 Chromium UI 测试、官方逐帧渲染及 MP4 验证。详见 [reports/STATUS.md](reports/STATUS.md)、[验证日志](reports/validation.log)。
-- 远程 Actions、可下载 Artifacts 和公网 Pages 必须另外核实；工作流文件存在不等于已运行或已发布。禁止把未核实 URL 当交付网站。
+- 远程 Actions 两项作业与 Artifact 上传、重新下载和 MP4 解码已通过：[真实运行与产物](https://github.com/guoanze550-commits/movie/actions/runs/39578090995#artifacts)。公网 Pages 尚未上线：创建站点 API 返回 403，需所有者启用 GitHub Actions 来源。
 
 ## 快速开始
 
@@ -82,13 +82,20 @@ bash scripts/render.sh fixtures/smoke preview
 
 ### 可选配音与音乐
 
-基础环境包括 numpy/scipy/soundfile/soxr，可原创合成配乐并调用官方 sfx。按需在上游执行官方 `setup.sh deps voice` 或 `deps music`，并使用官方 TTS/ASR、采样器与乐器下载工具。仅用基础合成不下载数百 MB 模型/乐器。中文在线 voice 使用 edge-tts，依赖 Microsoft 语音服务；本环境网络策略拒绝 `speech.platform.bing.com`，未生成中文语音或验收 ASR。默认项目“配音开启”是创作需求，不表示服务已验证。该项阻塞未来配音作品，不阻塞无配音的部署测试。
+基础环境包括 numpy/scipy/soundfile/soxr，可原创合成配乐并调用官方 sfx。中文配音已额外安装独立 `.venv-voice`，版本锁定在 `requirements-voice-zh.lock`，实际调用官方中文入口完成 2.364 秒语音生成与解码。为适配云环境，包装器仅使用 edge-tts 支持的代理参数，并为其 SSLContext 加载平台已有 CA；证书和主机名校验保留。
+
+```bash
+bash scripts/setup-voice-zh.sh
+.venv-voice/bin/python scripts/voice-zh.py fixtures/voice-smoke/lines.json fixtures/voice-smoke/out
+```
+
+这只准备中文在线入口所需依赖，不冒充完整 voice tier。需要离线 Kokoro、ASR 或实体采样乐器时，再执行官方 `setup.sh deps voice` / `deps music` 及 fetch 工具。未声称中文 ASR/主观听感或正式片整段配音已通过；正式片须继续官方语音检查与混音验收。
 
 ## GitHub Actions 与发布
 
-- `test.yml`：push/PR/手动触发，安装固定依赖、UI 与端到端渲染验收、始终上传测试产物。
+- `test.yml`：源码 push/PR/手动触发，安装固定依赖、UI 与端到端渲染验收、始终上传测试产物，并调用 render.yml 做独立渲染验收。
 - `render.yml`：手动选择 `project` 与 `preview/production`，验证目录及风格状态，调用官方程序、合成与封装、质量报告；失败也收集已有日志及关键帧，保存 30 天。
-- `pages.yml`：手动构建并发布静态 studio。需在仓库 Settings → Pages 选择 GitHub Actions，并有 Pages 发布权限。
+- `pages.yml`：手动或 studio 源码推送后构建并发布静态 studio。需在仓库 Settings → Pages 选择 GitHub Actions，并有 Pages 发布权限。
 
 上传后工作流通过官方 download-artifact 重新下载产物，并对下载副本执行完整解码、码流检查和 SHA256 记录；这一步必须实际成功才算远程产物验收。
 
@@ -105,7 +112,7 @@ gh run download RUN_ID --dir downloaded-artifacts
 gh workflow run pages.yml --ref studio-bootstrap
 ```
 
-首次空仓库没有 main 的提交，无法创建以 main 为 base 的普通 PR；开发保存在 `studio-bootstrap`，不伪造 PR。远程推送/API/工作流的实际结果以 `reports/STATUS.md` 为准。需要先建立用户认可的默认分支，再进行常规 PR 审核。没有将配置保存、源码提交或工作流文件存在说成已发布网站。
+原先空仓库没有 main 提交，现已创建最小 main 审核基线；完整源码在 [PR #1](https://github.com/guoanze550-commits/movie/pull/1) 中审查，原始开发历史保存在 `studio-bootstrap`。PR 未合并，没有覆盖既有 main 或重写开发分支。Pages 创建操作因集成权限返回 403；需仓库所有者在 Settings → Pages 选择 GitHub Actions 后重跑发布。
 
 ## 更新上游
 
