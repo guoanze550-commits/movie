@@ -1,0 +1,21 @@
+{
+  "node": "v24.19.0",
+  "python": "3.12.14",
+  "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "chromium": "Chromium 154.0.8037.57 built on Debian GNU/Linux 13 (trixie)",
+  "upstream": "b5e8ef93930b6d828f352055a689320f138237b1",
+  "python_packages": [
+    "brotli==1.2.0",
+    "cffi==2.1.1",
+    "fonttools==4.67.0",
+    "numpy==2.5.4",
+    "pillow==13.0.0",
+    "pycparser==3.11",
+    "scipy==1.18.1",
+    "soundfile==0.14.0",
+    "soxr==1.1.0",
+    "typing_extensions==4.16.0"
+  ],
+  "compiled_ffmpeg": "ffmpeg version n7.1.5 Copyright (c) 2000-2026 the FFmpeg developers",
+  "compiled_ffmpeg_source": "https://github.com/FFmpeg/FFmpeg/tree/3a0867c2bfda4a4d4309ca1a8cbdc6175e67f587"
+}
