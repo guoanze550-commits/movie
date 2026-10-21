@@ -88,6 +88,8 @@ bash scripts/render.sh fixtures/smoke preview
 - `render.yml`：手动选择 `project` 与 `preview/production`，验证目录及风格状态，调用官方程序、合成与封装、质量报告；失败也收集已有日志及关键帧，保存 30 天。
 - `pages.yml`：手动构建并发布静态 studio。需在仓库 Settings → Pages 选择 GitHub Actions，并有 Pages 发布权限。
 
+上传后工作流通过官方 download-artifact 重新下载产物，并对下载副本执行完整解码、码流检查和 SHA256 记录；这一步必须实际成功才算远程产物验收。
+
 GitHub Actions 引用已锁定到真实远程 tag SHA（见 `reports/actions-lock.json`）。输入通过环境变量传递，不插值执行 shell；渲染脚本拒绝目录穿越和未选风格。
 
 有权限后实际执行并核实：

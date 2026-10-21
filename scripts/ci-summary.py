@@ -13,6 +13,6 @@ if summary:
 # Publish only the explicitly captured test output of this public source project.
 p=root/'reports/ci-validation.log'
 if p.exists():
-    excerpt='\n'.join(p.read_text(errors='replace').splitlines()[-100:])[-14000:]
+    excerpt='\n'.join(p.read_text(errors='replace').splitlines()[-22:])[-3000:]
     escaped=excerpt.replace('%','%25').replace('\r','%0D').replace('\n','%0A')
     print('::notice title=Validation diagnostic::'+escaped)

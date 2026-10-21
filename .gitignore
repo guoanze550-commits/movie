@@ -10,3 +10,4 @@ reports/*.log
 !reports/validation.log
 _artifacts/
 .venv-voice/
+_downloaded/

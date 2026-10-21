@@ -45,3 +45,12 @@ jobs:
           path: _artifacts/
           if-no-files-found: warn
           retention-days: 30
+      - name: Download uploaded render artifact
+        if: success()
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: film-render-${{ github.run_id }}
+          path: _downloaded
+      - name: Verify downloaded artifact MP4
+        if: success()
+        run: python3 scripts/verify-downloaded.py _downloaded
