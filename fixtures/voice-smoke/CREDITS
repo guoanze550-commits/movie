@@ -1,0 +1,5 @@
+Deployment test voice: Microsoft Edge online neural speech service, zh-CN-XiaoxiaoNeural.
+Text: original technical acceptance sentence; unrelated to the formal film.
+Synthesis entrypoint: official Lemo-Opuscar core/tts/tts_zh.py (MIT).
+Client: edge-tts, pinned in requirements-voice-zh.lock; upstream https://github.com/rany2/edge-tts (LGPL-3.0).
+Online service usage terms: Microsoft service terms; review applicable voice usage rights for a formal production. No commercial-use licence is asserted by this technical test.

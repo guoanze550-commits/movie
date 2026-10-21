@@ -1,0 +1,18 @@
+{
+  "id": "wenming-weiyang",
+  "name": "文明未央",
+  "theme": "中国历史与文明传承",
+  "status": "awaiting_style",
+  "style": "unselected",
+  "style_path": "unselected",
+  "duration": 30,
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "aspect": "16:9",
+  "language": "zh-CN",
+  "voice": true,
+  "subtitles": true,
+  "music": "original",
+  "storyboard_review": false
+}

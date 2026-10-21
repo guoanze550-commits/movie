@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Movie — 代码动画工作室</title>
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="./index.html"
+        >M<span>◉</span>VIE <small>代码动画工作室</small></a
+      ><span class="status">LEMO-OPUSCAR / CODEX</span>
+    </header>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">STYLE LIBRARY / 01</p>
+        <h1>每一个故事，<br />由你决定它的样子。</h1>
+        <p class="muted">
+          51 种官方视觉语言。选择风格，建立工程，再开始导演。<br />《文明未央》尚未启动制作，等待你的选择。
+        </p>
+        <div class="stats">
+          <span><b>51</b> 官方风格</span><span><b>10</b> 创作门类</span
+          ><span><b>∞</b> 原创故事</span>
+        </div>
+      </section>
+      <section aria-label="风格展厅">
+        <div class="toolbar">
+          <h2>风格展厅 <span id="count">加载中</span></h2>
+          <input
+            id="search"
+            type="search"
+            aria-label="搜索风格"
+            placeholder="搜索中文名称、题材、关键词…"
+          />
+        </div>
+        <nav id="categories" aria-label="风格分类"></nav>
+        <p id="load-error" role="alert"></p>
+        <div id="cards" class="grid"></div>
+      </section>
+      <section class="create" id="project">
+        <div>
+          <p class="eyebrow">NEW PRODUCTION / 02</p>
+          <h2>下一部作品，从这里开始。</h2>
+          <p id="selected" role="status">尚未选择风格 / unselected</p>
+          <button id="mix" type="button">选择原创混合风格 · 非官方</button>
+        </div>
+        <form id="project-form">
+          <label
+            >项目 ID<input
+              name="id"
+              value="wenming-weiyang"
+              required
+              pattern="[a-z0-9]+(-[a-z0-9]+)*" /></label
+          ><label>作品名称<input name="name" value="文明未央" required /></label
+          ><label class="wide"
+            >动画主题<input
+              name="theme"
+              value="中国历史与文明传承"
+              required /></label
+          ><label
+            >时长 / 秒<input
+              name="duration"
+              type="number"
+              min="1"
+              max="600"
+              value="30"
+              required /></label
+          ><label
+            >画幅<select name="aspect">
+              <option>16:9</option>
+              <option>9:16</option>
+              <option>1:1</option>
+            </select></label
+          ><label
+            >帧率<select name="fps">
+              <option>24</option>
+              <option>25</option>
+              <option>30</option>
+              <option>60</option>
+            </select></label
+          ><label
+            >宽度 / px<input
+              name="width"
+              type="number"
+              min="16"
+              max="8192"
+              step="2"
+              value="1920"
+              required /></label
+          ><label
+            >高度 / px<input
+              name="height"
+              type="number"
+              min="16"
+              max="8192"
+              step="2"
+              value="1080"
+              required /></label
+          ><label>语言<input name="language" value="zh-CN" required /></label
+          ><label class="wide" id="custom-label" hidden
+            >原创混合方案（非官方，需确认测试帧）<textarea
+              name="custom_style"
+              placeholder="描述主风格、借鉴元素及具体变更"
+            ></textarea>
+          </label>
+          <div class="checks wide">
+            <label><input name="voice" type="checkbox" checked />中文配音</label
+            ><label
+              ><input name="subtitles" type="checkbox" checked />字幕</label
+            ><label
+              ><input
+                name="storyboard_review"
+                type="checkbox"
+              />故事板先审</label
+            ><span>音乐：原创配乐</span>
+          </div>
+          <button class="primary wide" type="submit">
+            生成项目配置与 Codex 任务 ↗
+          </button>
+          <p id="form-error" class="wide" role="alert"></p>
+        </form>
+        <div id="output" class="wide" hidden>
+          <p>
+            配置只会下载到浏览器，不会自动覆盖仓库或启动制作。将 project.json
+            放入对应 films/&lt;id&gt;/，或使用 CLI 创建工程。
+          </p>
+          <button id="download">下载 project.json</button>
+          <button id="copy-task">复制 Codex 任务</button
+          ><textarea id="task" readonly aria-label="Codex 制作任务"></textarea>
+          <p id="copy-status" role="status"></p>
+        </div>
+      </section>
+    </main>
+    <dialog id="detail">
+      <button id="close" aria-label="关闭详情">×</button>
+      <div id="detail-body"></div>
+      <button id="choose" class="primary">选择此风格</button>
+    </dialog>
+    <footer>
+      用户作品与官方依赖分离 · 风格与版本可追溯 · 未选择风格，不启动制作
+    </footer>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>

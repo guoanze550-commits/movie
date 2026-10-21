@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "provider": "Microsoft Edge online speech",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "official_entrypoint": "upstream/lemo-opuscar/core/tts/tts_zh.py",
+  "duration": 2.364,
+  "sample_rate": 24000,
+  "channels": 1,
+  "full_decode": true,
+  "proxy_route": true,
+  "tls_certificate_verification": true,
+  "hostname_verification": true,
+  "asr_validated": false,
+  "formal_film_produced": false
+}

@@ -1,0 +1,10 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><style>@font-face{font-family:StudioCJK;src:url(fonts/StudioCJK.woff2)}html,body{margin:0;overflow:hidden}canvas{display:block}</style><canvas id="screen"></canvas><script type="module">
+import {ss,seg} from '/core/lib.js';
+const timeline=await fetch('timeline.json').then(r=>{if(!r.ok)throw Error('timeline missing');return r.json()}),c=document.querySelector('canvas'),g=c.getContext('2d');
+c.width=innerWidth;c.height=innerHeight;
+await document.fonts.load('48px StudioCJK',timeline.title);await document.fonts.ready;
+if(!document.fonts.check('48px StudioCJK',timeline.title))throw Error('Chinese font failed');
+window.DUR=timeline.duration;window.EV=timeline.events;
+window.TEXTS=t=>t>=0&&t<window.DUR?[{id:'title',text:timeline.title,x0:c.width*.1,y0:c.height*.18,x1:c.width*.9,y1:c.height*.3}]:[];
+window.render=t=>{const w=c.width,h=c.height;g.fillStyle='#171e24';g.fillRect(0,0,w,h);g.strokeStyle='#83919a';g.lineWidth=2;g.beginPath();g.moveTo(w*.1,h*.6);g.lineTo(w*.9,h*.6);g.stroke();for(let i=0;i<13;i++){const x=w*(.1+.8*i/12);g.fillStyle='#83919a';g.fillRect(x,h*.57,2,h*.06)}g.fillStyle='#f3f1e9';g.font=`${h*.07}px StudioCJK`;g.fillText(timeline.title,w*.1,h*.27);const p=ss(seg(t,0,window.DUR));g.fillStyle='#c6e89b';g.beginPath();g.arc(w*(.1+.8*p),h*.6,h*.025,0,Math.PI*2);g.fill();for(const e of timeline.events){const age=t-e.t;if(age>=0&&age<.35){g.strokeStyle='#c6e89b';g.lineWidth=3;g.strokeRect(w*.1,h*.74,w*.8*ss(age/.35),h*.02)}}};window.render(0);window.READY=true;
+</script></html>

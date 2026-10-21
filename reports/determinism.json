@@ -1,0 +1,14 @@
+{
+  "deterministic": true,
+  "random_seed": 20261021,
+  "random_frame_times": [
+    3.4583333333333335,
+    0.4583333333333333,
+    2.9166666666666665,
+    4.875,
+    2.8333333333333335
+  ],
+  "page_contract": true,
+  "fonts_loaded": true,
+  "preview_size": "640x360"
+}
