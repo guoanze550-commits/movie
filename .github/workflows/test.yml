@@ -1,6 +1,7 @@
 name: Studio checks
 on:
   push:
+    branches: [studio-bootstrap, main]
     paths: ['studio/**', 'styles/**', 'scripts/**', 'tests/**', 'fixtures/**', 'upstream/**', '.github/workflows/**', 'requirements-core.lock', 'package*.json', 'AGENTS.md']
   pull_request:
   workflow_dispatch:
