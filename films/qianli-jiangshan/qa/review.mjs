@@ -15,4 +15,4 @@ const checks={random_access_determinism:deterministic.every(x=>x.equal),unique_r
 const result={scope:'4-second technical review ONLY',checks,deterministic,maxCameraStep,maxRiseStep,samples:states,not_tested:['formal 60-second film','restorer acting','formal subtitles and voice','full crane flight choreography','artistic approval']};
 fs.writeFileSync(film+'qa/technical.json',JSON.stringify(result,null,2)+'\n');
 await browser.close();closeServer();if(Object.values(checks).some(x=>!x))process.exitCode=1;
-console.log(JSON.stringify(checks));
+console.log('::notice title=Qianli technical checks::'+JSON.stringify(checks));
