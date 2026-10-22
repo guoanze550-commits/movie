@@ -1,0 +1,19 @@
+{
+  "scope": "art model data, NOT a geographic survey",
+  "checks": {
+    "binary_hashes": true,
+    "declared_point_count": true,
+    "art_classes": true,
+    "ground_surface_coincidence": true,
+    "sixty_spatial_pages": true
+  },
+  "points": 1679260,
+  "class_counts": [
+    893554,
+    615615,
+    148606,
+    21485
+  ],
+  "max_ground_to_triangle_error_model_m": 0.009800000000026898,
+  "quantization_max_axis_error_model_m": 0.005
+}

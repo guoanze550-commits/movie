@@ -46,6 +46,9 @@ jobs:
         run: bash scripts/install-ffmpeg.sh
       - run: bash scripts/setup.sh
       - run: npx --prefix upstream/lemo-opuscar playwright-core install-deps chromium
+      - name: Verify artistic point-cloud data
+        if: inputs.project == 'films/qianli-lidar'
+        run: upstream/lemo-opuscar/.venv/bin/python films/qianli-lidar/tools/verify-data.py
       - name: Validate input and render with official tools
         env:
           FILM_PROJECT: ${{ inputs.project }}
@@ -53,6 +56,15 @@ jobs:
         run: |
           set -o pipefail
           bash scripts/render.sh "$FILM_PROJECT" "$FILM_PROFILE" 2>&1 | tee reports/ci-validation.log
+      - name: Verify LiDAR spatial stability and decoded frames
+        if: inputs.project == 'films/qianli-lidar'
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.cache/ms-playwright
+        run: |
+          if command -v chromium >/dev/null; then export PLAYWRIGHT_CHROME=$(command -v chromium); fi
+          node films/qianli-lidar/qa/review.mjs
+          upstream/lemo-opuscar/.venv/bin/python films/qianli-lidar/qa/video.py
+          cp films/qianli-lidar/qa/data.json films/qianli-lidar/out/data-quality.json
       - name: Publish diagnostics summary
         if: always()
         run: python3 scripts/ci-summary.py
