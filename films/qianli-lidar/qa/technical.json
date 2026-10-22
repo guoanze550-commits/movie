@@ -1,0 +1,49 @@
+{
+  "scope": "7-second LiDAR visual review, not complete film",
+  "curve_test": "169 analytic samples of the same curve used by render; actual decoded video frames checked separately",
+  "checks": {
+    "random_seek_png_exact": true,
+    "fixed_point_coordinates": true,
+    "depth_test_and_write": true,
+    "depth_24bit": true,
+    "c1_camera_no_jump": true,
+    "monotonic_scan": true,
+    "shared_plane": true,
+    "spatial_parallax": true,
+    "art_label_and_gate": true
+  },
+  "random": [
+    {
+      "t": 6.641,
+      "same": true,
+      "sha256": "7e49c935a007a8a6c5df68118433524b95f8d962cf2495317a209eae206e8f4b"
+    },
+    {
+      "t": 0.317,
+      "same": true,
+      "sha256": "91fbdda2f8aed4aebf72c7c2c58272bfe551c4d7ce5e1c8a815bc9e8baa0c6e8"
+    },
+    {
+      "t": 4.719,
+      "same": true,
+      "sha256": "477d97253f6a0b5fd051af915c327ac39175d3bc10fc104a8c570b4e846317f5"
+    },
+    {
+      "t": 2.283,
+      "same": true,
+      "sha256": "009f74854c7f4d29240911c50f6f58ceda1b369df4a650b110e056ec784fc19e"
+    }
+  ],
+  "max_camera_step_model_m": 1.293338839133431,
+  "parallax": {
+    "near_count": 504,
+    "far_count": 4137,
+    "near_median_px": 64.4083137972963,
+    "far_median_px": 9.241412468487235
+  },
+  "manual_review_required": [
+    "artistic quality and naturalness",
+    "full-speed subjective sound and rhythm",
+    "no claim of real survey or archaeology"
+  ]
+}
