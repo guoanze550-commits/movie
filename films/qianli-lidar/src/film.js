@@ -27,7 +27,7 @@ gl_Position=projectionMatrix*mv;gl_PointSize=clamp(.24*proj/max(dist,1.),px,3.2*
 const pointFS=`varying vec3 col;varying float vis;void main(){float r=length(gl_PointCoord-.5);if(r>.5)discard;float edge=1.-smoothstep(.35,.5,r);gl_FragColor=vec4(col*(1.-.17*r)*sqrt(edge)*vis,1.);}`;
 const surfaceVS=`attribute vec3 nrm;attribute float ao;varying vec3 p,n;varying float occ,dist;void main(){p=position;n=nrm;occ=ao;vec4 mv=modelViewMatrix*vec4(position,1.);dist=-mv.z;gl_Position=projectionMatrix*mv;}`;
 const surfaceFS=`precision highp float;uniform float front;uniform vec3 sun,bg,scan;varying vec3 p,n;varying float occ,dist;${plane}
-void main(){float d=front-plane(p);if(d<0.)discard;float ext=min(min(p.x+240.,240.-p.x),min(p.z+80.,720.-p.z));if(ext<3.)discard;vec3 nn=normalize(n);float light=max(dot(nn,sun),0.);vec3 clay=vec3(.40,.37,.31),shade=vec3(.047,.065,.070);vec3 c=clay*(.19+.96*light)*(.42+.58*occ)+shade*(1.-light)*.55;
+void main(){float d=front-plane(p);if(d<0.)discard;float ext=min(min(p.x+240.,240.-p.x),min(p.z+80.,720.-p.z));if(ext<3.)discard;vec3 nn=normalize(n);if(!gl_FrontFacing)nn=-nn;float light=max(dot(nn,sun),0.);vec3 clay=vec3(.40,.37,.31),shade=vec3(.047,.065,.070);vec3 c=clay*(.19+.96*light)*(.42+.58*occ)+shade*(1.-light)*.55;
 float cy=p.y/6.,cw=max(fwidth(cy),.001);float ct=1.-smoothstep(cw*.5,cw*1.25,min(fract(cy),1.-fract(cy)));c*=1.-ct*.12;
 float river=18.*sin(p.z*.012)+10.*sin(p.z*.029+.4);float water=1.-smoothstep(9.5,11.2,abs(p.x-river));c=mix(c,vec3(.014,.045,.048),water);
 float fill=smoothstep(0.,18.,d);c=mix(c*.20,c,fill);c+=scan*1.7*exp(-d/.5);float fog=exp(-max(dist-70.,0.)/720.);c=mix(bg,c,fog*smoothstep(3.,26.,ext));gl_FragColor=vec4(c,1.);}`;
@@ -59,7 +59,7 @@ ctx.fillStyle='rgba(3,6,8,.86)';ctx.fillRect(1420,40,425,90);
 text('landmark','亭台轮廓 · 模型空间',1450,82,24,'Noto','#b99e73');
 const lp=new THREE.Vector3(...manifest.landmarks[0]);lp.y+=13;lp.project(camera);const ax=(lp.x*.5+.5)*1920,ay=(-lp.y*.5+.5)*1080;
 if(lp.z<1&&ax>0&&ax<1920&&ay>150&&ay<970){ctx.strokeStyle='rgba(185,158,115,.64)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(1530,105);ctx.lineTo(1530,150);ctx.lineTo(ax,ay);ctx.stroke();ctx.beginPath();ctx.arc(ax,ay,4,0,Math.PI*2);ctx.stroke();}
-text('review','LiDAR Survey / 7s VISUAL TEST',76,1018,20,'Plex','#8eaaa2');ctx.restore();texts=texts.map(b=>({...b,x0:b.x0*W/1920,x1:b.x1*W/1920,y0:b.y0*H/1080,y1:b.y1*H/1080}));}
+ctx.fillStyle='rgba(3,6,8,.90)';ctx.fillRect(56,982,540,60);text('review','LiDAR Survey / 7s VISUAL TEST',76,1018,20,'Plex','#b7cbc3');ctx.restore();texts=texts.map(b=>({...b,x0:b.x0*W/1920,x1:b.x1*W/1920,y0:b.y0*H/1080,y1:b.y1*H/1080}));}
 function shotState(t){const s=stateAt(t);if(shot==='mountain')return {...s,camera:[200,250,-235,0,70,225,38],front:-1000,cut:30};if(shot==='valley')return {...s,camera:[-9,37,-18,9,71,195,45],front:-1000,cut:30};if(shot==='scan')return {...s,camera:[-123,117,-86,-6,64,202,42],front:105,cut:16};return s}
 const frustum=new THREE.Frustum(),vp=new THREE.Matrix4();
 window.DUR=T.duration;window.EV=T.events;window.TEXTS=()=>texts;window.DATA_KIND='artistic_reconstruction_not_survey';window.PRODUCTION_AUTHORIZED=false;
